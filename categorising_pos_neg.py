@@ -48,17 +48,12 @@ For plotting the graphs: visit plotting_graph.py
 
 import matplotlib.pyplot as plt
 
-x_cooirdinates = [1,2]
+x_coordinates = [1,2]
 list_height = [positive_revs, negative_revs]
 
 bar_labels = ['+ve', '-ve']
 
-plt.bar(x_cooirdinates, list_height, tick_label = bar_labels, width = 0.8, color = ['green', 'red'])
+plt.bar(x_coordinates, list_height, tick_label = bar_labels, width = 0.8, color = ['green', 'red'])
 
 plt.title('Hard-Disk review')
 plt.show()
-
-
-
-
-
