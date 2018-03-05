@@ -1,2 +1,2 @@
-# user_reviews_analysis
-Graphs for +ve &amp; -ve reviews of a hard-disk
+# Use of this repo
+Bar Graph for +ve &amp; -ve reviews of a hard-disk
