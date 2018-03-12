@@ -1,8 +1,8 @@
 '''
 status:
-    -categorised all the +ve & -ve reviews for speed
-    -next: draw a bar graph for all review keywords for speed
-    -next: do the same for price factor
+    -categorised all the +ve & -ve reviews
+    -done: draw a bar graph for all review keywords for Speed
+    -next: do the same for Price factor
 '''
 
 import pandas as pd
