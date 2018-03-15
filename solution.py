@@ -25,7 +25,7 @@ for i in range(no_records):
 
 list_speed = ['speed', 'clock']
 list_positive_rev_for_speed = ['best', 'lovely', 'great', 'fast', 'good']
-list_negative_for_speed = ['disappointed', 'utterly', 'hate', 'worst', 'worthless', 'cheated', 'waste', 'bad']
+list_negative_for_speed = ['average', 'disappointed', 'utterly', 'hate', 'worst', 'worthless', 'cheated', 'waste', 'bad']
 dict_no_negative_reviews_for_speed = {}
 dict_no_positive_reviews_for_speed = {}
 count_positive_revs_for_speed = 0 #initial positive and negative reviews
@@ -56,6 +56,32 @@ for rev in list_reviews:
                         dict_no_negative_reviews_for_speed[neg] += 1
                     else:
                         dict_no_negative_reviews_for_speed[neg] = 1
+            break
+
+'''for checking USB speed now: '''
+list_speed_usb = ['usb', 'read-write', 'speed']
+list_usb_speed_numbers = []
+for rev in list_reviews:
+    for speed in list_speed_usb:
+        if speed in rev.lower():
+            import re   #regular expression
+            #list_usb_speed_numbers = list(map(int, re.findall(r'\d+', str(rev.lower))))
+            list_usb_speed_numbers = list(map(str, re.findall(r'(\d+)\-(\d+)', str(rev.lower))))
+            print(list_usb_speed_numbers)
+        
+            for num in list_usb_speed_numbers:
+                if num != 3 and num != 0 and num > 7 and num < 51:
+                    if num in dict_no_positive_reviews_for_speed:
+                        dict_no_positive_reviews_for_speed[num] += 1
+                    else:
+                        dict_no_positive_reviews_for_speed[num] = 1
+                elif num <= 7 and num > 0:
+                    if num in dict_no_negative_reviews_for_speed:
+                        dict_no_negative_reviews_for_speed[num] += 1
+                    else:
+                        dict_no_negative_reviews_for_speed[num] = 1
+            #break
+
                     
 #print(dict_no_positive_reviews_for_speed)
 #print(dict_no_negative_reviews_for_speed)
