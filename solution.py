@@ -28,6 +28,8 @@ list_positive_rev_for_speed = ['best', 'lovely', 'great', 'fast', 'good']
 list_negative_for_speed = ['average', 'disappointed', 'utterly', 'hate', 'worst', 'worthless', 'cheated', 'waste', 'bad']
 dict_no_negative_reviews_for_speed = {}
 dict_no_positive_reviews_for_speed = {}
+dict_rating_reviews_for_speed = {}
+dict_speed_nums_reviews_for_speed = {}
 count_positive_revs_for_speed = 0 #initial positive and negative reviews
 count_negative_revs_for_speed = 0
 
@@ -65,26 +67,44 @@ for rev in list_reviews:
     for speed in list_speed_usb:
         if speed in rev.lower():
             import re   #regular expression
+            #finding all digits:
             #list_usb_speed_numbers = list(map(int, re.findall(r'\d+', str(rev.lower))))
-            list_usb_speed_numbers = list(map(str, re.findall(r'(\d+)\-(\d+)', str(rev.lower))))
-            print(list_usb_speed_numbers)
-        
-            for num in list_usb_speed_numbers:
-                if num != 3 and num != 0 and num > 7 and num < 51:
-                    if num in dict_no_positive_reviews_for_speed:
-                        dict_no_positive_reviews_for_speed[num] += 1
+            
+            list_rating_numbers_raw = list(re.findall(r'[:|\ ](\d+)\/(\d+)\ ', str(rev)))
+            #ex. 5/5, 4/5, 9/10 (here dates such as 20/04/17 will be ignored)
+            #print(list_rating_numbers_raw)
+            
+            list_rating_numbers_sorted = []
+
+            for i in list_rating_numbers_raw:
+                list_rating_numbers_sorted.append(i[0] + '/' + i[1])
+                #print(list_rating_numbers_sorted) #working
+
+                for j in list_rating_numbers_sorted:
+                    if j in dict_rating_reviews_for_speed:
+                        dict_rating_reviews_for_speed[j] += 1
                     else:
-                        dict_no_positive_reviews_for_speed[num] = 1
-                elif num <= 7 and num > 0:
-                    if num in dict_no_negative_reviews_for_speed:
-                        dict_no_negative_reviews_for_speed[num] += 1
+                        dict_rating_reviews_for_speed[j] = 1
+
+            list_speed_numbers_raw = list(re.findall(r'[:|\ ](\d+)\-(\d+)\ ', str(rev)))
+            #ex. 5/5, 4/5, 9/10 (here dates such as 20/04/17 will be ignored)
+            #print(list_rating_numbers_raw)
+            
+            list_speed_numbers_sorted = []
+
+            for i in list_speed_numbers_raw:
+                list_speed_numbers_sorted.append(i[0] + '-' + i[1])
+
+                for j in list_speed_numbers_sorted:
+                    if j in dict_speed_nums_reviews_for_speed:
+                        dict_speed_nums_reviews_for_speed[j] += 1
                     else:
-                        dict_no_negative_reviews_for_speed[num] = 1
-            #break
+                        dict_speed_nums_reviews_for_speed[j] = 1
 
                     
 #print(dict_no_positive_reviews_for_speed)
 #print(dict_no_negative_reviews_for_speed)
+#print(dict_rating_reviews_for_speed)
 
 #print("pos:", count_positive_revs_for_speed, "neg:", count_negative_revs_for_speed)
 
@@ -94,36 +114,52 @@ Up next: Plotting the bar graph for +ve reviews of SPEED
 
 import matplotlib.pyplot as plt
 
-total_x_coor = len(dict_no_positive_reviews_for_speed) + len(dict_no_negative_reviews_for_speed)
+total_x_coor = len(dict_no_positive_reviews_for_speed) + len(dict_no_negative_reviews_for_speed) + len(dict_rating_reviews_for_speed) + len(dict_speed_nums_reviews_for_speed)
 x = range(total_x_coor)
-#how many +ve distinct keywords are present, to be on x-axis
+#how many +ve/-ve/average/rating distinct keywords are present, to be on x-axis
 
 #y = [count_positive_revs_for_speed, count_negative_revs_for_speed]
 #bar_labels = ['+ve', '-ve']
 
-y_pos = []
-bar_labels_pos = []
+y_pos_reviews = []
+bar_labels_pos_reviews = []
 for i in dict_no_positive_reviews_for_speed:
-    bar_labels_pos.append(i)
-    y_pos.append(dict_no_positive_reviews_for_speed[i])
+    bar_labels_pos_reviews.append(i)
+    y_pos_reviews.append(dict_no_positive_reviews_for_speed[i])
 
 
-y_neg = []
-bar_labels_neg = []
+y_neg_reviews = []
+bar_labels_neg_reviews = []
 for i in dict_no_negative_reviews_for_speed:
-    bar_labels_neg.append(i)
-    y_neg.append(dict_no_negative_reviews_for_speed[i])
+    bar_labels_neg_reviews.append(i)
+    y_neg_reviews.append(dict_no_negative_reviews_for_speed[i])
 
-y = y_pos + y_neg
-bar_labels = bar_labels_pos + bar_labels_neg
 
-#y = y_pos
-#bar_labels = bar_labels_pos
+y_rating_reviews = []
+bar_labels_rating_reviews = []
+for i in dict_rating_reviews_for_speed:
+    bar_labels_rating_reviews.append(i)
+    y_rating_reviews.append(dict_rating_reviews_for_speed[i])
 
-color = ['green']*len(dict_no_positive_reviews_for_speed) + ['red']*len(dict_no_negative_reviews_for_speed)
+y_speed_nums_reviews = []
+bar_labels_speed_nums_reviews = []
+for i in dict_speed_nums_reviews_for_speed:
+    bar_labels_speed_nums_reviews.append(i)
+    y_speed_nums_reviews.append(dict_speed_nums_reviews_for_speed[i])
+
+
+y = y_pos_reviews + y_neg_reviews + y_rating_reviews + y_speed_nums_reviews
+bar_labels = bar_labels_pos_reviews + bar_labels_neg_reviews + bar_labels_rating_reviews + bar_labels_speed_nums_reviews
+
+#print(bar_labels + bar_labels_rating_reviews)
+#print(y + y_rating_reviews)
+
+#y = y_pos_reviews
+#bar_labels = bar_labels_pos_reviews
+
+color = ['green']*len(dict_no_positive_reviews_for_speed) + ['red']*len(dict_no_negative_reviews_for_speed) + ['orange']*len(dict_rating_reviews_for_speed) + ['yellow']*len(dict_speed_nums_reviews_for_speed)
 
 plt.bar(x, y, tick_label = bar_labels, width = 0.4, color = color)
 
 plt.title('Hard-Disk review for SPEED')
 plt.show()
-
