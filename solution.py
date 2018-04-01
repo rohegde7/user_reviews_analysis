@@ -23,6 +23,10 @@ for i in range(no_records):
     # i represents the 'i'th row/record
 #print(list_reviews)    #working
 
+'''
+                            1.SPEED
+'''
+
 list_speed = ['speed', 'clock']
 list_positive_rev_for_speed = ['best', 'lovely', 'great', 'fast', 'good']
 list_negative_for_speed = ['average', 'disappointed', 'utterly', 'hate', 'worst', 'worthless', 'cheated', 'waste', 'bad']
@@ -34,7 +38,6 @@ count_positive_revs_for_speed = 0 #initial positive and negative reviews
 count_negative_revs_for_speed = 0
 
 '''
-                    SPEED!
     1st: check for speed keywords in the list of reviews
     2nd: if found, check for positive/negative keywords in the review list
 '''
@@ -163,3 +166,82 @@ plt.bar(x, y, tick_label = bar_labels, width = 0.4, color = color)
 
 plt.title('Hard-Disk review for SPEED')
 plt.show()
+
+'''
+                        END of SPEED
+                        2. COST
+'''
+
+list_cost = ['cost','price']
+
+list_positive_cost_keywords = ['best','discounted','good','real steal for price','reasonable','4/5','lowest']
+list_negative_cost_keywords = ['costly','price to be decrease','wasted','lose','not cheap','not comparative','rs.800 more','more','very high','higher','waste of money','highest','price low to attract customer','cheaper in market','damn high','much price']
+
+dict_positive_revs_cost = {}
+dict_negative_revs_cost = {}
+dict_average_revs_cost = {}
+
+count_positive_revs_cost = 0
+count_negative_revs_cost = 0
+
+#next: checking for the keywords in the reviews
+
+for rev in list_reviews:
+    for cost_key in list_cost:
+        if cost_key in rev.lower():
+            for pos_cost_keyy in list_positive_cost_keywords:
+                if pos_cost_keyy in rev.lower():
+
+                    count_positive_revs_cost += 1
+
+                    if pos_cost_keyy in dict_positive_revs_cost:
+                        dict_positive_revs_cost[pos_cost_keyy] += 1
+                    else:
+                        dict_positive_revs_cost[pos_cost_keyy] = 1
+
+            for neg_cost_keyy in list_negative_cost_keywords:
+                if neg_cost_keyy in rev.lower():
+
+                    count_negative_revs_cost += 1
+
+                    if neg_cost_keyy in dict_negative_revs_cost:
+                        dict_negative_revs_cost[neg_cost_keyy] += 1
+                    else:
+                        dict_negative_revs_cost[neg_cost_keyy] = 1
+
+#print(dict_positive_revs_cost)
+#print(dict_negative_revs_cost)     both working
+
+'''
+next: plotting graph for COST
+'''
+
+x_len_cost = len(dict_positive_revs_cost) + len(dict_negative_revs_cost)
+x_coor_cost = range(x_len_cost)
+
+y_pos_revs_cost = []
+bar_labels_pos_revs_cost = []
+for i in dict_positive_revs_cost:
+    bar_labels_pos_revs_cost.append(i)
+    y_pos_revs_cost.append(dict_positive_revs_cost[i])
+
+y_neg_revs_cost = []
+bar_labels_neg_revs_cost = []
+for i in dict_negative_revs_cost:
+    bar_labels_neg_revs_cost.append(i)
+    y_neg_revs_cost.append(dict_negative_revs_cost[i])
+
+y_coor_cost = y_pos_revs_cost + y_neg_revs_cost
+bar_labels_cost = bar_labels_pos_revs_cost + bar_labels_neg_revs_cost
+
+color_cost = ['green']*len(dict_positive_revs_cost) + ['red']*len(dict_negative_revs_cost)
+
+plt.bar(x_coor_cost, y_coor_cost, tick_label = bar_labels_cost, width = 0.4, color = color_cost)
+
+plt.title('COST reviews')
+plt.show()
+
+'''
+                    END of COST
+                    3. LOOKS
+'''
