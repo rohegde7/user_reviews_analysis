@@ -245,3 +245,151 @@ plt.show()
                     END of COST
                     3. LOOKS
 '''
+
+list_looks = ['looks', 'look']
+
+list_positive_looks_keywords = ['sturdy and great', '5/5','cute', 'good', 'blue looks really good', 'slim', 'sexy', 'really good', 'best', 'aluminum face looks superb', 'great with a mac', 'truly stellar', 'mesmerizing', 'awesome', 'red good', 'Red color looks pretty and classy and very thin', 'Colour is shiny which attracts again and again', 'Mini mobile', 'nice and smaller than pic', 'stylish']
+list_negative_looks_keywords = ['faulty',  'fragile']
+
+dict_positive_revs_looks = {}
+dict_negative_revs_looks = {}
+dict_average_revs_looks = {}
+
+count_positive_revs_looks = 0
+count_negative_revs_looks = 0
+
+#next: checking for the keywords in the reviews
+
+for rev in list_reviews:
+    for looks_key in list_looks:
+        if looks_key in rev.lower():
+            for pos_looks_keyy in list_positive_looks_keywords:
+                if pos_looks_keyy in rev.lower():
+
+                    count_positive_revs_looks += 1
+
+                    if pos_looks_keyy in dict_positive_revs_looks:
+                        dict_positive_revs_looks[pos_looks_keyy] += 1
+                    else:
+                        dict_positive_revs_looks[pos_looks_keyy] = 1
+
+            for neg_looks_keyy in list_negative_looks_keywords:
+                if neg_looks_keyy in rev.lower():
+
+                    count_negative_revs_looks += 1
+
+                    if neg_looks_keyy in dict_negative_revs_looks:
+                        dict_negative_revs_looks[neg_looks_keyy] += 1
+                    else:
+                        dict_negative_revs_looks[neg_looks_keyy] = 1
+
+#print(dict_positive_revs_cost)
+#print(dict_negative_revs_cost)     both working
+
+'''
+next: plotting graph for LOOKS
+'''
+
+x_len_looks = len(dict_positive_revs_looks) + len(dict_negative_revs_looks)
+x_coor_looks = range(x_len_looks)
+
+y_pos_revs_looks = []
+bar_labels_pos_revs_looks = []
+for i in dict_positive_revs_looks:
+    bar_labels_pos_revs_looks.append(i)
+    y_pos_revs_looks.append(dict_positive_revs_looks[i])
+
+y_neg_revs_looks = []
+bar_labels_neg_revs_looks = []
+for i in dict_negative_revs_looks:
+    bar_labels_neg_revs_looks.append(i)
+    y_neg_revs_looks.append(dict_negative_revs_looks[i])
+
+y_coor_looks = y_pos_revs_looks + y_neg_revs_looks
+bar_labels_looks = bar_labels_pos_revs_looks + bar_labels_neg_revs_looks
+
+color_looks = ['green']*len(dict_positive_revs_looks) + ['red']*len(dict_negative_revs_looks)
+
+plt.bar(x_coor_looks, y_coor_looks, tick_label = bar_labels_looks, width = 0.4, color = color_looks)
+
+plt.title('LOOKS reviews')
+plt.show()
+
+'''
+                    END of LOOKS
+                    4.SIZE
+'''
+
+list_size = ['size']
+
+list_positive_size_keywords = ['smaller', 'awesome', 'brilliant', 'wallet size', 'slimmest', '12mm', '10/10', 'compact', 'perfect', 'small', 'fits in pocket', 'very compact']
+list_negative_size_keywords = ['big', 'heavy']
+
+dict_positive_revs_size = {}
+dict_negative_revs_size = {}
+dict_average_revs_size = {}
+
+count_positive_revs_size = 0
+count_negative_revs_size = 0
+
+#next: checking for the keywords in the reviews
+
+for rev in list_reviews:
+    for size_key in list_size:
+        if size_key in rev.lower():
+            for pos_size_keyy in list_positive_size_keywords:
+                if pos_size_keyy in rev.lower():
+
+                    count_positive_revs_size += 1
+
+                    if pos_size_keyy in dict_positive_revs_size:
+                        dict_positive_revs_size[pos_size_keyy] += 1
+                    else:
+                        dict_positive_revs_size[pos_size_keyy] = 1
+
+            for neg_size_keyy in list_negative_size_keywords:
+                if neg_size_keyy in rev.lower():
+
+                    count_negative_revs_size += 1
+
+                    if neg_size_keyy in dict_negative_revs_size:
+                        dict_negative_revs_size[neg_size_keyy] += 1
+                    else:
+                        dict_negative_revs_size[neg_size_keyy] = 1
+
+#print(dict_positive_revs_cost)
+#print(dict_negative_revs_cost)     both working
+
+'''
+next: plotting graph for LOOKS
+'''
+
+x_len_size = len(dict_positive_revs_size) + len(dict_negative_revs_size)
+x_coor_size = range(x_len_size)
+
+y_pos_revs_size = []
+bar_labels_pos_revs_size = []
+for i in dict_positive_revs_size:
+    bar_labels_pos_revs_size.append(i)
+    y_pos_revs_size.append(dict_positive_revs_size[i])
+
+y_neg_revs_size = []
+bar_labels_neg_revs_size = []
+for i in dict_negative_revs_size:
+    bar_labels_neg_revs_size.append(i)
+    y_neg_revs_size.append(dict_negative_revs_size[i])
+
+y_coor_size = y_pos_revs_size + y_neg_revs_size
+bar_labels_size = bar_labels_pos_revs_size + bar_labels_neg_revs_size
+
+color_size = ['green']*len(dict_positive_revs_size) + ['red']*len(dict_negative_revs_size)
+
+plt.bar(x_coor_size, y_coor_size, tick_label = bar_labels_size, width = 0.4, color = color_size)
+
+plt.title('SIZE reviews')
+plt.show()
+
+'''
+                    END of SIZE
+'''
+
