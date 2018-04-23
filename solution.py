@@ -28,7 +28,7 @@ for i in range(no_records):
 '''
 
 list_speed = ['speed', 'clock']
-list_positive_rev_for_speed = ['best', 'lovely', 'great', 'fast', 'good']
+list_positive_rev_for_speed = ['best', 'lovely', 'great', 'fast', 'good', 'fastest']
 list_negative_for_speed = ['average', 'disappointed', 'utterly', 'hate', 'worst', 'worthless', 'cheated', 'waste', 'bad']
 dict_no_negative_reviews_for_speed = {}
 dict_no_positive_reviews_for_speed = {}
@@ -96,7 +96,7 @@ for rev in list_reviews:
             list_speed_numbers_sorted = []
 
             for i in list_speed_numbers_raw:
-                list_speed_numbers_sorted.append(i[0] + '-' + i[1])
+                list_speed_numbers_sorted.append(i[0] + '-' + i[1] + ' mbps')
 
                 for j in list_speed_numbers_sorted:
                     if j in dict_speed_nums_reviews_for_speed:
@@ -160,7 +160,7 @@ bar_labels = bar_labels_pos_reviews + bar_labels_neg_reviews + bar_labels_rating
 #y = y_pos_reviews
 #bar_labels = bar_labels_pos_reviews
 
-color = ['green']*len(dict_no_positive_reviews_for_speed) + ['red']*len(dict_no_negative_reviews_for_speed) + ['orange']*len(dict_rating_reviews_for_speed) + ['yellow']*len(dict_speed_nums_reviews_for_speed)
+color = ['green']*len(dict_no_positive_reviews_for_speed) + ['red']*len(dict_no_negative_reviews_for_speed) + ['orange']*len(dict_rating_reviews_for_speed) + ['blue']*len(dict_speed_nums_reviews_for_speed)
 
 plt.bar(x, y, tick_label = bar_labels, width = 0.4, color = color)
 
