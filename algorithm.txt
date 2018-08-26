@@ -1,0 +1,20 @@
+Step 1:
+        Read the excel file and store it in the form of a DataFrame object
+Step 2:
+        Calculate the shape of the DataFrame
+Step 3:
+        Read the reviews, break it down into individual reviews and store it as an individual element in a list
+Step 4:
+        Make lists of factors to review the comments and two lists for all the positive and negative keywords for the keyword search 
+Step 5:
+        Set the counters for all the review factors as zero
+Step 6:
+        Create a dictionary to make a key-value pair of the keywords and it's occurance counters
+Step 7:
+        Search for the key in the list and match it with the required reviews and store it in the dictionary along with it's count
+Step 8:
+        For plotting the graph use the matplotlib library
+Step 9:
+        Append all the required labels in one list, calculate the required rows and columns and plot the bar graph
+Step 10: 
+        Repeat the steps for more sections of the analysis
